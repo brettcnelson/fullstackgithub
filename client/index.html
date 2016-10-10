@@ -42,14 +42,16 @@ $(document).ready(function() {
   $('.repo-fetcher').on('submit', function(e) {
     e.preventDefault();
     var username = $('#user').val();
-    console.log(username);
     $.ajax({
-      url: 'https://api.github.com/users/' + username + '/repos?access_token=5fb036494ec4271f8331c483777da5dee6116591',
+      url: 'https://api.github.com/users/' + username + '/repos?access_token=f2516602faab1cd55dc18eda3a1c0d03daee21a0',
       type: 'GET',
       contentType: 'application/json',
       success: function(data) {
         // send data to app.post
-        console.log(data);
+        // console.log(data);
+        data.forEach(function(obj) {
+          console.log(username, obj.name, obj.stargazers_count)
+        })
       },
       error: function(err) {
         console.log('err', err)

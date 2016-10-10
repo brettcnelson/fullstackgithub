@@ -1,5 +1,6 @@
 var express = require('express');
 var bodyParser = require('body-parser');
+var path = require('path');
 
 
 var app = express();
@@ -18,16 +19,22 @@ var knex = require('knex')({
 
 app.post('/repos/import', function (req, res) {
   // TODO
+
+
+
 });
 
 
 app.get('/repos', function (req, res) {
   // TODO
+
+
+
 });
 
 
 app.get('/', function (req, res) {
-  res.sendFile(__dirname + '/client/index.html')
+  res.sendFile(path.join(__dirname, '../client/index.html'))
 });
 
 var port = process.env.PORT || 4040;

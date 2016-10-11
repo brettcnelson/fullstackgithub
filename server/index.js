@@ -1,6 +1,7 @@
 var express = require('express');
 var bodyParser = require('body-parser');
 var path = require('path');
+var knex = require('knex');
 
 
 var app = express();
@@ -19,9 +20,12 @@ var knex = require('knex')({
 
 app.post('/repos/import', function (req, res) {
   // TODO
-
-
-
+  req.body.forEach(function(repo) {
+    knex('repos').insert({id: repo.id, url: repo.svn_url, username: repo.user, repo_name: repo.name, stargazers: repo.stargazers_count})
+    .then(function(result) {
+      res.json({success: true, message: 'ok'})
+    });
+  })
 });
 
 

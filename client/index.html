@@ -43,14 +43,20 @@ $(document).ready(function() {
     e.preventDefault();
     var username = $('#user').val();
     $.ajax({
-      url: 'https://api.github.com/users/' + username + '/repos?access_token=f2516602faab1cd55dc18eda3a1c0d03daee21a0',
+      url: 'https://api.github.com/users/' + username + '/repos?access_token=08848e55f2900522c17ea5c4bb99aad85b059a9d',
       type: 'GET',
       contentType: 'application/json',
       success: function(data) {
         // send data to app.post
-        // console.log(data);
-        data.forEach(function(obj) {
-          console.log(username, obj.name, obj.stargazers_count)
+        var postRepos = data.map(function(repo) {
+          return {id: repo.id, url: repo.svn_url, user: username, repoName: repo.name, gazers: repo.stargazers_count};
+        })
+
+        $.ajax({
+          url: '/repos/import',
+          type: 'POST',
+          contentType: 'application/json',
+          data: JSON.stringify(postRepos)
         })
       },
       error: function(err) {

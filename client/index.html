@@ -43,7 +43,7 @@ $(document).ready(function() {
     e.preventDefault();
     var username = $('#user').val();
     $.ajax({
-      url: 'https://api.github.com/users/' + username + '/repos?access_token=08848e55f2900522c17ea5c4bb99aad85b059a9d',
+      url: 'https://api.github.com/users/' + username + '/repos?access_token=',
       type: 'GET',
       contentType: 'application/json',
       success: function(data) {

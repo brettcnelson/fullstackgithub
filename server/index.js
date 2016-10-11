@@ -21,21 +21,20 @@ var knex = require('knex')({
 app.post('/repos/import', function (req, res) {
   // TODO
   req.body.forEach(function(repo) {
-    knex('repos').insert({id: repo.id, url: repo.svn_url, username: repo.user, repo_name: repo.name, stargazers: repo.stargazers_count})
-    .then(function(result) {
-      res.json({success: true, message: 'ok'})
-    });
-  })
+    knex('repos').insert({id: repo.id, url: repo.url, username: repo.user, repo_name: repo.repoName, stargazers: repo.gazers})
+      .then(function(result) {
+        console.log('end')
+    })
+  });
+  // console.log(req.body)
 });
-
 
 app.get('/repos', function (req, res) {
-  // TODO
-
-
+  // // TODO
+  // knex('*')
+  // knex('repos').orderBy('stargazers')
 
 });
-
 
 app.get('/', function (req, res) {
   res.sendFile(path.join(__dirname, '../client/index.html'))
